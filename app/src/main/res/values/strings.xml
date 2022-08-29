@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SimpleRegisterInterface</string>
+    <array name="countries">
+        <item>Uzbekistan</item>
+        <item>Germany</item>
+        <item>Russian</item>
+        <item>Arab</item>
+        <item>USA</item>
+    </array>
+</resources>
