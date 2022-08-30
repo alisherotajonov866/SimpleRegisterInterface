@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
 
     // qisqa "logt" yozuvi orqali chiqarsa bo'ladi
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "myLogs";
 
     private TextView tvWarnName,tvWarnEmail,tvWarnPassword,tvWarnPassRepeat;
     private Button btnPickImage,btnRegister;
@@ -69,7 +69,34 @@ public class MainActivity extends AppCompatActivity {
         tvWarnPassword.setVisibility(View.GONE);
         tvWarnPassRepeat.setVisibility(View.GONE);
 
-        Snackbar.make(constraintLayout,"User registered",Snackbar.LENGTH_INDEFINITE)
+        String name = etName.getText().toString();
+        String email = etEmail.getText().toString();
+        String country = countriesSpinner.getSelectedItem().toString();
+        String gender = "";
+
+        switch (rgGender.getCheckedRadioButtonId()){
+            case R.id.rbMale:
+                gender = "Male";
+                break;
+            case R.id.rbFemale:
+                gender = "Female";
+                break;
+            case R.id.rbOther:
+                gender = "Other";
+                break;
+            default:
+                gender = "Unknown";
+                break;
+        }
+
+        String snackText = "Name: " + name + "\n" +
+                "Email: " + email + "\n" +
+                "Gender: " + gender + "\n" +
+                "country: " + country ;
+
+        Log.d(TAG,"showSnackBar: SnackBarText " + snackText);
+
+        Snackbar.make(constraintLayout,snackText,Snackbar.LENGTH_LONG)
                 .setAction("Dismiss", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -94,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
             tvWarnEmail.setText("Enter your Email");
             return false;
         }
+        else {
+            tvWarnEmail.setVisibility(View.GONE);
+        }
         if (etPassword.getText().toString().equals("")){
             tvWarnPassword.setVisibility(View.VISIBLE);
             tvWarnPassword.setText("Enter your Password");
@@ -101,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (etPassRepeat.getText().toString().equals("")){
             tvWarnPassRepeat.setVisibility(View.VISIBLE);
-            tvWarnPassword.setText("Repeat your password");
+            tvWarnPassRepeat.setText("Repeat your password");
             return false;
         }
 
